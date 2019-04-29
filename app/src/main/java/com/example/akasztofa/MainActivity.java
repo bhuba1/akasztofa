@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             this.guessedChars = savedInstanceState.getStringArrayList("guessed");
             this.actWord = savedInstanceState.getString("actword");
             this.actWordSimple = savedInstanceState.getString("actwordsimple");
-            this.word.setText(actWordSimple);
+            changeActWord();
             Drawable d;
             if(clickCount == 1) {
                 d = getResources().getDrawable(R.drawable.ember1);
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             this.clickCount = intent.getIntExtra("count",0);
             this.chosenWord = intent.getStringExtra("chosen");
             this.actWordSimple = intent.getStringExtra("act");
-            this.word.setText(this.actWordSimple);
+            changeActWord();
             debug.setText(chosenWord);
 
         }
@@ -169,19 +169,27 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
     public void setActWord(){
-        actWord = "";
+        String actWord = "";
         actWordSimple = "";
         debug.setText(chosenWord);
         for (int i = 0; i < chosenWord.length();i++) {
 
-            actWord+="_";
-            actWordSimple += "_";
-            if(i<chosenWord.length()-1){
-                actWord+=" ";
-            }
-        }
-        word.setText("A szó eddig:" + actWordSimple);
 
+            actWordSimple += "_";
+
+        }
+        for(int i = 0; i < actWordSimple.length();i++){
+            actWord+=" "+ actWordSimple.charAt(i);
+        }
+        word.setText("A szó eddig:" + actWord);
+
+    }
+    public void changeActWord() {
+        String actWord = "";
+        for(int i = 0; i < actWordSimple.length();i++){
+            actWord+=" "+ actWordSimple.charAt(i);
+        }
+        word.setText("A szó eddig:" + actWord);
     }
 
     public void changeImg() {
@@ -263,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     this.actWordSimple = sb.toString();
-                    this.word.setText(actWordSimple);
+                    changeActWord();
                     //Toast.makeText(this,"|" + actWordSimple +"|",Toast.LENGTH_LONG).show();
                     if(actWordSimple.toLowerCase().equals(chosenWord.toLowerCase())) {
                         Toast.makeText(this,"Talált!",Toast.LENGTH_LONG).show();

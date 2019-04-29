@@ -50,13 +50,12 @@ public class CoolerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-
-
         clickCount = intent.getIntExtra("count",0);
         actWordSimple = intent.getStringExtra("act");
-        actView.setText(this.actWordSimple);
+
         chosenWord = intent.getStringExtra("chosen");
         debug.setText("Debug: "+intent.getStringExtra("chosen"));
+        changeActWord();
 
         int ember = intent.getIntExtra("ember",0);
         Drawable d;
@@ -169,7 +168,7 @@ public class CoolerActivity extends AppCompatActivity {
 
                 }
                 this.actWordSimple = sb.toString();
-                this.actView.setText(actWordSimple);
+                changeActWord();
                 //Toast.makeText(this,"|" + actWordSimple +"|",Toast.LENGTH_LONG).show();
                 if(actWordSimple.toLowerCase().equals(chosenWord.toLowerCase())) {
                     Toast.makeText(this,"Talált!",Toast.LENGTH_LONG).show();
@@ -190,7 +189,7 @@ public class CoolerActivity extends AppCompatActivity {
 
     }
     public void setActWord(){
-
+        String actWord = "";
         actWordSimple = "";
         debug.setText(chosenWord);
         for (int i = 0; i < chosenWord.length();i++) {
@@ -199,8 +198,18 @@ public class CoolerActivity extends AppCompatActivity {
             actWordSimple += "_";
 
         }
-        actView.setText("A szó eddig:" + actWordSimple);
+        for(int i = 0; i < actWordSimple.length();i++){
+            actWord+=" "+ actWordSimple.charAt(i);
+        }
+        actView.setText("A szó eddig:" + actWord);
 
+    }
+    public void changeActWord() {
+        String actWord = "";
+        for(int i = 0; i < actWordSimple.length();i++){
+            actWord+=" "+ actWordSimple.charAt(i);
+        }
+        actView.setText("A szó eddig:" + actWord);
     }
     public void changeImg() {
         clickCount++;
