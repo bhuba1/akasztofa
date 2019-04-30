@@ -12,7 +12,8 @@
         <activity
             android:name=".CoolerActivity"
             android:label="@string/title_activity_cooler"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
